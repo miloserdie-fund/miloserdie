@@ -1,4 +1,4 @@
 # miloserdie
-Портал добровольцев
+Портал добровольцев.
 
 ![miloserdie.svg](miloserdie.svg)
