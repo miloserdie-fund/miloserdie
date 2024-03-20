@@ -279,3 +279,6 @@ thumb
 sketch
 
 # End of https://www.toptal.com/developers/gitignore/api/intellij+all,clojure,java,react,node
+/dev-resources/
+/.shadow-cljs/
+/dev-resources/public/js/

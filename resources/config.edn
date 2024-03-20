@@ -1,0 +1,28 @@
+{; Profile injected to Integrant.
+ :backend/profile #profile {:prod :prod
+                            :dev :dev
+                            :test :test}
+
+  ; Miscellaneous options.
+ :backend/options {:jwt {:exp #profile {:prod 1000
+                                        :dev 2000
+                                        :test 5000}}}
+
+ :backend/env {:profile #ig/ref :backend/profile
+               :data-dir "resources/data"
+              ;; Simulate database. 
+               ;; In real life we should have the connection to the database here.
+               :options #ig/ref :backend/options}
+
+ ;; This way we inject our world (env) to the API calls.
+ :backend/jetty {:port #profile {:dev #long #or [#env PORT 7171]
+                                 :prod #long #or [#env PORT 7172]}
+                 :join? false
+                 :env #ig/ref :backend/env}
+
+ :backend/nrepl {:bind #profile {:prod "0.0.0.0"
+                                 :dev "localhost"}
+                 :port #profile {:dev #long #or [#env PORT 7131]
+                                 :prod #long #or [#env PORT 7132]}}}
+
+
